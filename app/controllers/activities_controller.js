@@ -4,20 +4,8 @@ angular.module('evo_tracker').controller('activities_controller', [
     "$scope",
     "storage",
     function($scope, storage){
-        $scope.models = {
-            activity: {
-                types: ["Number", "Time"],
-                form_create: {
-                    name: "",
-                    p_name: "",
-                    p_type: "Number"
-                },
-                properties: []
-            },
 
-        };
-
-        updateScopeActivities();
+        initScopeModels();
 
         $scope.$on("activities_changed", updateScopeActivities);
 
@@ -77,8 +65,7 @@ angular.module('evo_tracker').controller('activities_controller', [
                     return alert(err);
                 }
 
-                $scope.models.activity.form_create.name = "";
-                $scope.models.activity.properties = [];
+                resetScopeModels();
             })
         };
 
@@ -93,6 +80,31 @@ angular.module('evo_tracker').controller('activities_controller', [
                 }
             })
         };
+
+        function initScopeModels(){
+            $scope.models = {
+                activity: {
+                    types: ["Number", "Time"],
+                    form_create: {
+                        name: "",
+                        p_name: "",
+                        p_type: "Number"
+                    },
+                    properties: []
+                }
+            };
+
+            updateScopeActivities();
+        }
+
+        function resetScopeModels(){
+            $scope.models.activity.form_create = {
+                name: "",
+                p_name: "",
+                p_type: "Number"
+            };
+            $scope.models.activity.properties = [];
+        }
 
         function updateScopeActivities(){
             $scope.models.activities = storage.getActivities();
