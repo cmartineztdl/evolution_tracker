@@ -4,11 +4,23 @@ angular.module('evo_tracker').factory('storage', [
     '$localStorage',
     function($localStorage){
 
-        this.name = "NOMBRE";
-        //var storage_service = {};
+        var storage = {
+            user: {
+                activities: []
+            }
+        };
 
-        this.hello = function(){console.log(this.name)};
+        var storage_service = {};
 
-        return this;
+        storage_service.storeUserActivity = function(activity, callback){
+            if(!activity.name || !activity.type) return callback("Name and type are needed.");
+            if(storage.user.activities.indexOf(activity.name) >= 0) return callback("An activity with that name already exists");
+
+            $localStorage.data = storage;
+            $localStorage.$save();
+            callback();
+        };
+
+        return storage_service;
     }
 ]);

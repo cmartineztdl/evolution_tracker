@@ -7,9 +7,13 @@ angular.module('evo_tracker',['ngRoute', 'ngStorage'])
                 templateUrl: "app/templates/home.html",
                 controller: "home_controller"
             })
-            .when('/tmp2', {
-                templateUrl: "app/templates/tmp2.html",
-                controller: "home_controller"
+            .when('/activities', {
+                templateUrl: "app/templates/activities.html",
+                controller: "activities_controller"
+            })
+            .when('/results', {
+                templateUrl: "app/templates/results.html",
+                controller: "results_controller"
             })
             .otherwise({
                 redirectTo: '/home'
