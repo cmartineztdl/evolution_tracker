@@ -21,8 +21,19 @@ angular.module('evo_tracker').factory('storage', [
             callback();
         };
 
-        storage_service.dropActivity = function(activity, callback){
+        storage_service.deleteActivity = function(activityName, callback){
+            var index = activities.map(function(e){return e.name}).indexOf(activityName);
+            if(index < 0)
+                return callback("Activity not found");
 
+            activities.splice(index, 1);
+
+            $localStorage.activities = activities;
+            $localStorage.$save();
+
+            $rootScope.$broadcast("activities_changed");
+
+            callback();
         };
 
         storage_service.getActivities = function(){

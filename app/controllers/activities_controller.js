@@ -17,7 +17,7 @@ angular.module('evo_tracker').controller('activities_controller', [
 
         };
 
-        updateScopeActivities();console.log($scope.models)
+        updateScopeActivities();
 
         $scope.$on("activities_changed", updateScopeActivities);
 
@@ -82,8 +82,16 @@ angular.module('evo_tracker').controller('activities_controller', [
             })
         };
 
-        $scope.deleteActivity = function(activity){
-            console.log("DELETE",activity)
+        $scope.deleteActivity = function(name){
+            if(!name){
+                return alert("Name needed");
+            }
+
+            storage.deleteActivity(name, function(err){
+                if(err){
+                    return alert(err);
+                }
+            })
         };
 
         function updateScopeActivities(){
