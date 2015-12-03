@@ -1,48 +1,65 @@
-<h1>ACTIVITIES</h1>
 <div class="row">
-    <div class="col-sm-4 class-xs-12">
-        <h2>Crate new activity</h2>
-        <form>
-            <div class="form-group">
-                <label for="input_name">Activity name:</label>
-                <input type="text" class="form-control" id="input_name" placeholder="Activity name" ng-model="models.activity.form_create.name">
-            </div>
+    <div class="col-md-4 col-sm-6 class-xs-12">
+        <div class="main-box">
+            <h3>Add activity</h3>
+            <form>
+                <div class="form-group">
+                    <label for="input_name">Activity name:</label>
+                    <input type="text" class="form-control" id="input_name" placeholder="Activity name" ng-model="models.activity.form_create.name">
+                </div>
 
-            <label>Properties:</label>
+                <label>Properties:</label>
 
-            <div ng-repeat="property in models.activity.properties" class="row form-group">
-                <div class="col-xs-5">
-                    <input type="text" class="form-control" placeholder="Property name" ng-model="property.name">
+                <div ng-repeat="property in models.activity.properties" class="row form-group">
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="Property name" ng-model="property.name">
+                    </div>
+                    <div class="col-xs-5">
+                        <select class="form-control" ng-model="property.type">
+                            <option ng-repeat="opt in models.activity.types" value="{{opt}}">{{opt}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-danger pull-right" ng-click="removeProperty(property.name)"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
                 </div>
-                <div class="col-xs-5">
-                    <select class="form-control" ng-model="property.type">
-                        <option ng-repeat="opt in models.activity.types" value="{{opt}}">{{opt}}</option>
-                    </select>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-danger pull-right" href="#" onclick="return false;" ng-click="removeProperty(property.name)"><span class="glyphicon glyphicon-trash"></span></button>
-                </div>
-            </div>
 
-            <div class="row form-group">
-                <div class="col-xs-5">
-                    <input type="text" class="form-control" placeholder="Property name" ng-model="models.activity.form_create.p_name">
+                <div class="row form-group">
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="Property name" ng-model="models.activity.form_create.p_name">
+                    </div>
+                    <div class="col-xs-5">
+                        <select class="form-control" ng-model="models.activity.form_create.p_type">
+                            <option ng-repeat="opt in models.activity.types" value="{{opt}}">{{opt}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-success pull-right" ng-click="addProperty()"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
                 </div>
-                <div class="col-xs-5">
-                    <select class="form-control" ng-model="models.activity.form_create.p_type">
-                        <option ng-repeat="opt in models.activity.types" value="{{opt}}">{{opt}}</option>
-                    </select>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-success pull-right" href="#" onclick="return false;" ng-click="addProperty()"><span class="glyphicon glyphicon-plus"></span></button>
-                </div>
-            </div>
 
-            <button type="submit" class="btn btn-lg btn-primary pull-right">Submit</button>
-        </form>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-lg btn-primary" ng-click="addActivity()">Add <span class="glyphicon glyphicon-ok"></span></button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="col-sm-8 class-xs-12">
-        <h2>Activities list</h2>
+    <div class="col-md-8 col-sm-6 class-xs-12">
+        <div class="main-box">
+            <h3>Activities</h3>
+            <div class="row">
+                <div ng-repeat="activity in models.activities" class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="list-elem">
+                        <button ng-click="deleteActivity(activity)" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></button>
+                        <h4><strong>Name: </strong>{{activity.name}}</h4>
+                        <h4><strong>Properties: </strong></h4>
+                        <ul>
+                            <li ng-repeat="property in activity.properties"><strong>{{property.name}}: </strong>{{property.type}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

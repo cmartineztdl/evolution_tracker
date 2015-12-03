@@ -6,3 +6,21 @@ body{
     max-height: 20px;
     float: left;
 }
+
+div.main-box{
+    padding: 15px;
+    margin: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+div.main-box h3{
+    margin-top: 5px;
+}
+
+div.list-elem{
+    padding: 10px;
+    margin: 10px 5px 10px 5px;
+    background-color: #fff;
+    border-radius: 5px;
+}
